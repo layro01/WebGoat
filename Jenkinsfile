@@ -4,12 +4,6 @@ pipeline {
     NODE_PATH = "/var/jenkins_home"
   }
   stages {
-    stage('Build') { 
-      steps {
-        sh 'apk add openjdk8'
-        sh 'apk add maven'
-      }
-    }
     stage('Test') {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.hailstone.io', port: '10010']) {
