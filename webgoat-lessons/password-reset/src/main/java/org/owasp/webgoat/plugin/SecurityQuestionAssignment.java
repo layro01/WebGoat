@@ -49,7 +49,7 @@ public class SecurityQuestionAssignment extends AssignmentEndpoint {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public AttackResult completed(@RequestParam String question) {
-        var answer = of(questions.get(question));
+        Optional<?> answer = of(questions.get(question));
         if (answer.isPresent()) {
             triedQuestions.incr(question);
             if (triedQuestions.isComplete()) {
