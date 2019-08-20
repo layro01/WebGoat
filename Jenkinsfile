@@ -17,6 +17,7 @@ pipeline {
           sh 'export MAVEN_OPTS=-agentlib=${PWD}/agent_nodejs_linux64'
           sh 'export IASTAGENT_LOGGING_STDERR_ENABLED=true'
           sh 'export IASTAGENT_LOGGING_STDERR_LEVEL=info'
+          sh 'env'
           sh 'mvn --batch-mode test'
         }
       }
