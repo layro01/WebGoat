@@ -10,9 +10,7 @@ pipeline {
         sh 'dir'
         sh 'uname --all'
         sh 'apk add openjdk8'
-        sh 'wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo'
-        sh 'sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo'
-        sh 'apt-get install -y apache-maven'
+        sh 'apk add maven'
       }
     }
     stage('Test') {
