@@ -9,7 +9,7 @@ pipeline {
         sh 'whoami'
         sh 'dir'
         sh 'uname --all'
-        sh 'apt-get install java-1.8.0-openjdk-devel.x86_64'
+        sh 'apk add openjdk8'
         sh 'wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo'
         sh 'sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo'
         sh 'apt-get install -y apache-maven'
