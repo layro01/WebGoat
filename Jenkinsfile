@@ -6,9 +6,6 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
-        sh 'whoami'
-        sh 'dir'
-        sh 'uname --all'
         sh 'apk add openjdk8'
         sh 'apk add maven'
       }
@@ -16,10 +13,10 @@ pipeline {
     stage('Test') {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'docker', port: '10010']) {
-          sh "export MAVEN_OPTS=-agentlib=$PWD/agent_nodejs_linux64"
-          sh "export IASTAGENT_LOGGING_STDERR_ENABLED=true"
-          sh "export IASTAGENT_LOGGING_STDERR_LEVEL=info"
-          sh "mvn test"
+          sh 'export MAVEN_OPTS=-agentlib=${PWD}agent_nodejs_linux64'
+          sh 'export IASTAGENT_LOGGING_STDERR_ENABLED=true'
+          sh 'export IASTAGENT_LOGGING_STDERR_LEVEL=info'
+          sh 'mvn --batch-mode test'
         }
       }
     }
