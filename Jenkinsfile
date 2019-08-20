@@ -4,11 +4,6 @@ pipeline {
     NODE_PATH = "/var/jenkins_home"
   }
   stages {
-    stage('Build') { 
-      steps {
-        sh 'apt-get install openjdk-8-jdk'
-      }
-    }
     stage('Test') {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'docker', port: '10010']) {
