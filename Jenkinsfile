@@ -6,10 +6,13 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
-        sh 'yum install java-1.8.0-openjdk-devel.x86_64'
+        sh 'whoami'
+        sh 'dir'
+        sh 'apt --help'
+        sh 'apt-get install java-1.8.0-openjdk-devel.x86_64'
         sh 'wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo'
         sh 'sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo'
-        sh 'yum install -y apache-maven'
+        sh 'apt-get install -y apache-maven'
       }
     }
     stage('Test') {
