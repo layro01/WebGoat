@@ -9,7 +9,9 @@ pipeline {
   }
   stages {
     stage('Build') {
-        sh 'apk add maven'
+        steps {
+            sh 'apk add maven'
+        }
     }
     stage('Test') {
       steps {
