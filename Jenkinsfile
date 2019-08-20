@@ -1,9 +1,16 @@
 pipeline {
-  agent any
+  agent {
+      docker {
+          image 'openjdk:8'
+      }
+  }
   environment {
     NODE_PATH = "/var/jenkins_home"
   }
   stages {
+    stage('Build') {
+        sh 'apk add maven'
+    }
     stage('Test') {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.hailstone.io', port: '10010']) {
