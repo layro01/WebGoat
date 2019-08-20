@@ -14,7 +14,7 @@ pipeline {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.hailstone.io', port: '10010']) {
           sh 'curl -sSL https://s3.us-east-2.amazonaws.com/app.veracode-iast.io/iast-ci.sh | sh'
-          sh 'export MAVEN_OPTS=-agentlib=${PWD}agent_nodejs_linux64'
+          sh 'export MAVEN_OPTS=-agentlib=${PWD}/agent_nodejs_linux64'
           sh 'export IASTAGENT_LOGGING_STDERR_ENABLED=true'
           sh 'export IASTAGENT_LOGGING_STDERR_LEVEL=info'
           sh 'mvn --batch-mode test'
