@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.hailstone.io', port: '10010']) {
+        wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.veracode-iast.io', port: '10010']) {
           sh 'apt-get update && apt-get install -y bzip2 unzip'
           sh 'curl -sSL https://s3.us-east-2.amazonaws.com/app.veracode-iast.io/java/agent-java-linux64.tar.gz -o java.zip'
           sh 'ls -l'
