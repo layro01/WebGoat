@@ -1,28 +1,26 @@
 pipeline {
   agent {
       docker {
-          image 'maven:3.6.1-jdk-8-slim'
+          image 'maven:3.6.1-jdk-8'
       }
   }
-  environment {
-    NODE_PATH = "/var/jenkins_home"
-  }
   stages {
+    stage('Build') { 
+      steps {
+        sh 'mvn clean compile'
+      }
+    }
     stage('Test') {
       steps {
         wrap([$class: 'VeracodeInteractiveBuildWrapper', location: 'agent-server.veracode-iast.io', port: '10010']) {
-          sh 'apt-get update && apt-get install -y bzip2 unzip'
-          sh 'curl -sSL https://s3.us-east-2.amazonaws.com/app.veracode-iast.io/java/agent-java-linux64.tar.gz -o java.zip'
-          sh 'ls -l'
-          sh 'tar xvf java.zip'
-          sh 'chmod +x run_with_iast.sh'
-          sh './run_with_iast.sh'
+          sh 'curl -sSL https://s3.us-east-2.amazonaws.com/app.veracode-iast.io/iast-ci.sh | sh'
+          sh 'mvn test'
         }
       }
     }
     stage('Deploy') { 
       steps {
-        sh 'echo mvn deploy would run here...'
+        sh 'echo mvn install would run here...'
       }
     }
   }
